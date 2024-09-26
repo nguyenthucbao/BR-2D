@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
@@ -11,9 +12,10 @@ public class Player : MonoBehaviour
     public Joystick shootingJS;
     private Rigidbody2D rb;
 
-    public float speed = 10f;
+
+    public float speed = 6f;
     public bool isShooting = false;
-    Vector2 testgame = new Vector2(0, 1);
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,7 +30,7 @@ public class Player : MonoBehaviour
         if (movementJS.Direction.y != 0)
         {
             rb.velocity = new Vector2(movementJS.Direction.x * speed, movementJS.Direction.y * speed);
-            if ( PLayerShooting())
+            if ( PlayerShooting())
             {
                 FacingTo(shootingJS.Direction);
             }
@@ -56,7 +58,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public bool PLayerShooting()
+    public bool PlayerShooting()
     {
         if (shootingJS.Direction.y != 0)          
         {
@@ -67,6 +69,8 @@ public class Player : MonoBehaviour
             isShooting = false;
             return false;
         }    
-    }    
+    }
+
+
 
 }

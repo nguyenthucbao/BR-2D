@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Equipment : MonoBehaviour
+public class ItemsManager : Singleton<ItemsManager>
 {
+    public List<GameObject> listWeapon = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -11,8 +12,8 @@ public class Equipment : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public GameObject GetWeapon()
     {
-        
+        return listWeapon[0];
     }
 }

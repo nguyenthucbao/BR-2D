@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - groundTag
   - playerTag
+  - Glock
+  - Items
   layers:
   - Default
   - TransparentFX
