@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
@@ -30,23 +31,23 @@ public class Player : MonoBehaviour
         if (movementJS.Direction.y != 0)
         {
             rb.velocity = new Vector2(movementJS.Direction.x * speed, movementJS.Direction.y * speed);
-            if ( PlayerShooting())
+            if (PlayerShooting())
             {
                 FacingTo(shootingJS.Direction);
             }
             else
             {
                 FacingTo(movementJS.Direction);
-            } 
-                
-            
+            }
+
+
         }
         else
         {
             rb.velocity = Vector2.zero;
             FacingTo(shootingJS.Direction);
         }
-    }    
+    }
 
     public void FacingTo(Vector2 direction)
     {
@@ -60,15 +61,16 @@ public class Player : MonoBehaviour
 
     public bool PlayerShooting()
     {
-        if (shootingJS.Direction.y != 0)          
+        if (shootingJS.Direction.y != 0)
         {
             isShooting = true;
             return true;
-        } else
+        }
+        else
         {
             isShooting = false;
             return false;
-        }    
+        }
     }
 
 

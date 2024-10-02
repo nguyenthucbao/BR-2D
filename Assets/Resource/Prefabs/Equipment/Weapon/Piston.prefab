@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4411340030922214758}
   - component: {fileID: 1502247207031689118}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8168554363286849232}
   - component: {fileID: 9092876394554105033}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6575845140587823020}
   - component: {fileID: 2915937569445399172}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3425619184812415082}
   - component: {fileID: 5431168532871907722}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5499498876063404198}
   - component: {fileID: 4970670705586282938}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,7 +435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1801080137438427216}
   - component: {fileID: 5601036426880222492}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -520,7 +520,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3054196651391775009}
   - component: {fileID: 4177472503850472736}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Triangle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -604,7 +604,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1175673549850645022}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -638,7 +638,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5081240935643941048}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -672,7 +672,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1608602097894599897}
   - component: {fileID: 5636160044390564136}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -757,7 +757,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7506286393043932644}
   - component: {fileID: 4096634524004057003}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Piston
   m_TagString: Items
   m_Icon: {fileID: 0}
