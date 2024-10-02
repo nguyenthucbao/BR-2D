@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class ItemsManager : Singleton<ItemsManager>
@@ -12,8 +13,12 @@ public class ItemsManager : Singleton<ItemsManager>
     }
 
     // Update is called once per frame
-    public GameObject GetWeapon()
+    public GameObject GetWeaponByName(string wpName)
     {
-        return listWeapon[0];
+        for (int i = 0; i <= listWeapon.Count; i++)
+        {
+            if(listWeapon[i].name == wpName) return listWeapon[i];
+        }
+        return null;
     }
 }

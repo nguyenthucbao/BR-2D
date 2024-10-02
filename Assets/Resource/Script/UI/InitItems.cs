@@ -47,7 +47,7 @@ public class InitItems : MonoBehaviour
         {
             Destroy(obj.gameObject);
         }
-        Instantiate(ItemsManager.Instance.GetWeapon(), weaponHand);
+        Instantiate(ItemsManager.Instance.GetWeaponByName(listItems[0].name), weaponHand);
         Debug.Log("taken");
     }
 }
