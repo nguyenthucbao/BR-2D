@@ -42,7 +42,7 @@ public class PlayerShootBullet : MonoBehaviour
             bulletRb.AddForce(shootingJS.Direction.normalized * bulletSpeed, ForceMode2D.Impulse);
             Debug.Log(shootingJS.Direction.x + " " + shootingJS.Direction.y);
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.4f);
         }
         shootingCoroutine = null;
     }

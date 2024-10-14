@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -18,8 +19,7 @@ public class InitItems : MonoBehaviour
 
     public LayerMask weaponLayer;
 
-    public string equipedWeapon;
-    public GameObject equipedWeaponObj;
+    public GameObject equipedWeapon;
 
     public GameObject rightHand;
     public GameObject leftHand;
@@ -42,7 +42,6 @@ public class InitItems : MonoBehaviour
     {
         if (collision.CompareTag("Items"))
         {
-
             listItems.Add(collision.gameObject);
         }
     }
@@ -64,32 +63,78 @@ public class InitItems : MonoBehaviour
         } 
         
     }
+
     public void InitWeapons()
     {
-        foreach (Transform obj in weaponHand)
-        {
-            Destroy(obj.gameObject);
-        }
+        //foreach (Transform obj in weaponHand)
+        //{
+        //    Destroy(obj.gameObject);
+        //}
 
-        //Switch weapon
         Collider2D hit = Physics2D.OverlapCircle(transform.position, 0.5f, weaponLayer);
 
-        if (Enum.IsDefined(typeof(WeaponType), equipedWeapon))
+        if (hit != null)
         {
-            Debug.Log(equipedWeapon);
-            Instantiate(ItemsManager.Instance.GetWeaponByName(equipedWeapon), hit.transform.position, Quaternion.identity);
+            Debug.Log("Hit object: " + hit.gameObject.name);
+            DropWeapon();
+
+            Piston piston = hit.GetComponent<Piston>();
+            piston.SetWeaponState(true);
+
+            hit.gameObject.transform.position = weaponHand.position;
+            hit.gameObject.transform.SetParent(weaponHand);
+            hit.gameObject.transform.localRotation = Quaternion.identity;
+
+            rightHand.SetActive(false);
+            leftHand.SetActive(false);
         }
-        //Switch weapon
-
-        rightHand.SetActive(false);
-        leftHand.SetActive(false);
-
-        equipedWeapon = hit.gameObject.name.Replace("(Clone)", "").Trim();
-        Debug.Log(equipedWeapon);
-
-        Instantiate(ItemsManager.Instance.GetHandingWeaponByName(equipedWeapon), weaponHand);
-        Destroy(hit.gameObject);
+       
     }
+
+    public void DropWeapon()
+    {
+        if (!rightHand.activeInHierarchy)
+        {
+            Piston piston = weaponHand.GetComponentInChildren<Piston>();
+            if (piston != null)
+            {
+                piston.transform.SetParent(null);
+                piston.SetWeaponState(false);
+                piston.transform.rotation = Quaternion.identity;
+            }
+            else
+            {
+                Debug.LogError("Piston not found in weaponHand");
+            }
+        }   
+    }    
+
+    //public void InitWeapons()
+    //{
+    //    foreach (Transform obj in weaponHand)
+    //    {
+    //        Destroy(obj.gameObject);
+    //    }
+
+    //    //Switch weapon
+    //    Collider2D hit = Physics2D.OverlapCircle(transform.position, 0.5f, weaponLayer);
+
+    //    if (Enum.IsDefined(typeof(WeaponType), equipedWeapon))
+    //    {
+    //        Debug.Log(equipedWeapon);
+    //        Instantiate(ItemsManager.Instance.GetWeaponByName(equipedWeapon), hit.transform.position, Quaternion.identity);
+    //    }
+    //    //Switch weapon
+
+    //    rightHand.SetActive(false);
+    //    leftHand.SetActive(false);
+
+    //    equipedWeapon = hit.gameObject.name.Replace("(Clone)", "").Trim();
+    //    Debug.Log(equipedWeapon);
+
+    //    Instantiate(ItemsManager.Instance.GetHandingWeaponByName(equipedWeapon), weaponHand);
+    //    Destroy(hit.gameObject);
+    //}
 
 
 
