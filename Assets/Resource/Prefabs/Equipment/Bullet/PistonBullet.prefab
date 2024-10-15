@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2014642511059805880}
   - component: {fileID: -6184938611678938056}
+  - component: {fileID: 660717158348265067}
   - component: {fileID: -6079102597094872558}
   m_Layer: 0
   m_Name: PistonBullet
@@ -56,6 +57,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &660717158348265067
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313131301007820270}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0010267943, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.07508518
 --- !u!114 &-6079102597094872558
 MonoBehaviour:
   m_ObjectHideFlags: 0

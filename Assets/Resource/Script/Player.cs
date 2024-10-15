@@ -13,9 +13,15 @@ public class Player : MonoBehaviour
     public Joystick shootingJS;
     private Rigidbody2D rb;
 
-
     public float speed = 6f;
     public bool isShooting = false;
+
+    private Coroutine shootingCoroutine;
+
+    public GameObject bulletPrefab;
+    public Transform shootingPoint;
+    public float bulletSpeed = 1000f;
+
 
     void Start()
     {
@@ -24,6 +30,14 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         PlayerMovement();
+        if (shootingJS.Direction.magnitude > 0.5f)
+        {
+            StartShooting();
+        }
+        else
+        {
+            StopShooting();
+        }
     }
 
     public void PlayerMovement()
@@ -39,8 +53,6 @@ public class Player : MonoBehaviour
             {
                 FacingTo(movementJS.Direction);
             }
-
-
         }
         else
         {
@@ -48,17 +60,6 @@ public class Player : MonoBehaviour
             FacingTo(shootingJS.Direction);
         }
     }
-
-    public void FacingTo(Vector2 direction)
-    {
-        //Vector2 direction = movementJS.Direction;
-        if (direction != Vector2.zero)
-        {
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, angle);
-        }
-    }
-
     public bool PlayerShooting()
     {
         if (shootingJS.Direction.y != 0)
@@ -72,7 +73,46 @@ public class Player : MonoBehaviour
             return false;
         }
     }
+    public void FacingTo(Vector2 direction)
+    {
+        if (direction != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
+    }
+    public void Death()
+    {
+        Debug.Log("RUDEATH");
+        Destroy(gameObject);
+    }
 
-
+    IEnumerator ShootCoroutine()
+    {
+        while (shootingJS.Direction.magnitude > 0.5f)
+        {
+            GameObject bullet = Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity);
+            bullet.GetComponent<PistonBullet>().seft = this;
+            Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+            bulletRb.AddForce(shootingJS.Direction.normalized * bulletSpeed, ForceMode2D.Impulse);
+            yield return new WaitForSeconds(0.4f);
+        }
+        shootingCoroutine = null;
+    }
+    private void StopShooting()
+    {
+        if (shootingCoroutine != null)
+        {
+            StopCoroutine(shootingCoroutine);
+            shootingCoroutine = null;
+        }
+    }
+    private void StartShooting()
+    {
+        if (shootingCoroutine == null)
+        {
+            shootingCoroutine = StartCoroutine(ShootCoroutine());
+        }
+    }
 
 }

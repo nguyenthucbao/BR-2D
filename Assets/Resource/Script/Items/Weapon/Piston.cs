@@ -19,26 +19,13 @@ public class Piston : MonoBehaviour
     }
     public void SetWeaponState(bool isInHand)
     {
-        //if (handingWeapon == null)
-        //{
-        //    Debug.LogError("handingWeapon is not assigned in the Inspector");
-        //}
-        //if (groundingWeapon == null)
-        //{
-        //    Debug.LogError("groundingWeapon is not assigned in the Inspector");
-        //}
-
         if (isInHand)
-        {
-            
-            
-            Debug.Log("handingWeaponSetActive");
+        {        
             handingWeapon.SetActive(true);      
             groundingWeapon.SetActive(false);   
         }
         else
         {
-            Debug.Log("groundingWeaponSetActive");
             handingWeapon.SetActive(false);     
             groundingWeapon.SetActive(true);    
         }

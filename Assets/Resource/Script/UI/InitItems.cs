@@ -70,7 +70,6 @@ public class InitItems : MonoBehaviour
         //{
         //    Destroy(obj.gameObject);
         //}
-
         Collider2D hit = Physics2D.OverlapCircle(transform.position, 0.5f, weaponLayer);
 
         if (hit != null)
@@ -104,38 +103,8 @@ public class InitItems : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Piston not found in weaponHand");
+                Debug.LogError("Piston not found!!!!!!!!!!!");
             }
         }   
     }    
-
-    //public void InitWeapons()
-    //{
-    //    foreach (Transform obj in weaponHand)
-    //    {
-    //        Destroy(obj.gameObject);
-    //    }
-
-    //    //Switch weapon
-    //    Collider2D hit = Physics2D.OverlapCircle(transform.position, 0.5f, weaponLayer);
-
-    //    if (Enum.IsDefined(typeof(WeaponType), equipedWeapon))
-    //    {
-    //        Debug.Log(equipedWeapon);
-    //        Instantiate(ItemsManager.Instance.GetWeaponByName(equipedWeapon), hit.transform.position, Quaternion.identity);
-    //    }
-    //    //Switch weapon
-
-    //    rightHand.SetActive(false);
-    //    leftHand.SetActive(false);
-
-    //    equipedWeapon = hit.gameObject.name.Replace("(Clone)", "").Trim();
-    //    Debug.Log(equipedWeapon);
-
-    //    Instantiate(ItemsManager.Instance.GetHandingWeaponByName(equipedWeapon), weaponHand);
-    //    Destroy(hit.gameObject);
-    //}
-
-
-
 }
