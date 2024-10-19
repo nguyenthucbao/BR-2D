@@ -16,12 +16,11 @@ public class Player : MonoBehaviour
     public float speed = 6f;
     public bool isShooting = false;
 
-    private Coroutine shootingCoroutine;
+    //private Coroutine shootingCoroutine;
 
-    public GameObject bulletPrefab;
-    public Transform shootingPoint;
-    public float bulletSpeed = 1000f;
-
+    //public GameObject bulletPrefab;
+    //public Transform shootingPoint;
+    //public float bulletSpeed = 1000f;
 
     void Start()
     {
@@ -30,14 +29,14 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         PlayerMovement();
-        if (shootingJS.Direction.magnitude > 0.5f)
-        {
-            StartShooting();
-        }
-        else
-        {
-            StopShooting();
-        }
+        //if (shootingJS.Direction.magnitude > 0.5f)
+        //{
+        //    StartShooting();
+        //}
+        //else
+        //{
+        //    StopShooting();
+        //}
     }
 
     public void PlayerMovement()
@@ -87,32 +86,31 @@ public class Player : MonoBehaviour
         Destroy(gameObject);
     }
 
-    IEnumerator ShootCoroutine()
-    {
-        while (shootingJS.Direction.magnitude > 0.5f)
-        {
-            GameObject bullet = Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity);
-            bullet.GetComponent<PistonBullet>().seft = this;
-            Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-            bulletRb.AddForce(shootingJS.Direction.normalized * bulletSpeed, ForceMode2D.Impulse);
-            yield return new WaitForSeconds(0.4f);
-        }
-        shootingCoroutine = null;
-    }
-    private void StopShooting()
-    {
-        if (shootingCoroutine != null)
-        {
-            StopCoroutine(shootingCoroutine);
-            shootingCoroutine = null;
-        }
-    }
-    private void StartShooting()
-    {
-        if (shootingCoroutine == null)
-        {
-            shootingCoroutine = StartCoroutine(ShootCoroutine());
-        }
-    }
-
+    //IEnumerator ShootCoroutine()
+    //{
+    //    while (shootingJS.Direction.magnitude > 0.5f)
+    //    {
+    //        GameObject bullet = Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity);
+    //        bullet.GetComponent<PistonBullet>().seft = this;
+    //        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+    //        bulletRb.AddForce(shootingJS.Direction.normalized * bulletSpeed, ForceMode2D.Impulse);
+    //        yield return new WaitForSeconds(0.4f);
+    //    }
+    //    shootingCoroutine = null;
+    //}
+    //private void StopShooting()
+    //{
+    //    if (shootingCoroutine != null)
+    //    {
+    //        StopCoroutine(shootingCoroutine);
+    //        shootingCoroutine = null;
+    //    }
+    //}
+    //private void StartShooting()
+    //{
+    //    if (shootingCoroutine == null)
+    //    {
+    //        shootingCoroutine = StartCoroutine(ShootCoroutine());
+    //    }
+    //}
 }

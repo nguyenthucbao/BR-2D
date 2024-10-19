@@ -15,15 +15,17 @@ public class InitItems : MonoBehaviour
     public List<GameObject> listItems = new List<GameObject>();
     public Transform weaponHand;
     public Button chooseButton;
-    
-
     public LayerMask weaponLayer;
-
     public GameObject equipedWeapon;
 
     public GameObject rightHand;
     public GameObject leftHand;
 
+    private Coroutine shootingCoroutine;
+    public Joystick shootingJS;
+    public GameObject bulletPrefab;
+    public Transform shootingPoint;
+    public float bulletSpeed = 1000f;
     public enum WeaponType
     {
         Piston,
@@ -36,8 +38,19 @@ public class InitItems : MonoBehaviour
         chooseButton.onClick.AddListener(() => ClaimButtonClick());
     }
 
+    void Update()
+    {
+        if (shootingJS != null && shootingJS.Direction.magnitude > 0.5f && !rightHand.activeInHierarchy)
+        {
+            StartShooting();
+        }
+        else
+        {
+            StopShooting();
+        }
+    }
 
-    //Debug
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Items"))
@@ -53,7 +66,7 @@ public class InitItems : MonoBehaviour
             listItems.Remove(collision.gameObject);
         }
     }
-    //Debug
+
 
     public void ClaimButtonClick()
     {
@@ -89,7 +102,6 @@ public class InitItems : MonoBehaviour
         }
        
     }
-
     public void DropWeapon()
     {
         if (!rightHand.activeInHierarchy)
@@ -106,5 +118,33 @@ public class InitItems : MonoBehaviour
                 Debug.LogError("Piston not found!!!!!!!!!!!");
             }
         }   
-    }    
+    }
+
+    IEnumerator ShootCoroutine()
+    {
+        while (shootingJS.Direction.magnitude > 0.5f)
+        {
+            GameObject bullet = Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity);
+            bullet.GetComponent<PistonBullet>().seft = this;
+            Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+            bulletRb.AddForce(shootingJS.Direction.normalized * bulletSpeed, ForceMode2D.Impulse);
+            yield return new WaitForSeconds(0.4f);
+        }
+        shootingCoroutine = null;
+    }
+    private void StopShooting()
+    {
+        if (shootingCoroutine != null)
+        {
+            StopCoroutine(shootingCoroutine);
+            shootingCoroutine = null;
+        }
+    }
+    private void StartShooting()
+    {
+        if (shootingCoroutine == null)
+        {
+            shootingCoroutine = StartCoroutine(ShootCoroutine());
+        }
+    }
 }

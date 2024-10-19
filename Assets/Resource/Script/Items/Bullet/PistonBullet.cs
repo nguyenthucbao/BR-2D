@@ -5,7 +5,7 @@ using UnityEngine.TextCore.Text;
 
 public class PistonBullet : MonoBehaviour
 {
-    public Player seft;
+    public InitItems seft;
     // Start is called before the first frame update
     void Start()
     {
